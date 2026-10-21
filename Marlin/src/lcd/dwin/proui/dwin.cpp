@@ -960,7 +960,7 @@ void onClickSDItem() {
 
 #if ENABLED(SCROLL_LONG_FILENAMES)
 
-  char shift_name[LONG_FILENAME_LENGTH + 1] = "";
+  char shift_name[LONG_FILENAME_BYTES + 1] = "";
 
   void drawSDItemShifted(uint8_t &shift) {
     // Shorten to the available space
@@ -991,7 +991,7 @@ void onClickSDItem() {
       if (selected >= 1 + hasUpDir) {
         const int8_t filenum = selected - 1 - hasUpDir; // Skip "Back" and ".."
         card.selectFileByIndexSorted(filenum);
-        makeNameWithoutExt(shift_name, card.longest_filename(), LONG_FILENAME_LENGTH);
+        makeNameWithoutExt(shift_name, card.longest_filename(), LONG_FILENAME_BYTES);
         shift_len = strlen(shift_name);
         shift_amt = 0;
       }
@@ -4157,8 +4157,8 @@ void drawMaxAccelMenu() {
 
   #if ENABLED(MPC_EDIT_MENU)
     void setHeaterPower() { setPFloatOnClick(1, 200, 1); }
-    void setBlkHeatCapacity() { setPFloatOnClick(0, 40, 2); }
-    void setSensorResponse() { setPFloatOnClick(0, 1, 4); }
+    void setBlkHeatCapacity() { setPFloatOnClick(0.01f, 40, 2); }
+    void setSensorResponse() { setPFloatOnClick(0.0001f, 1, 4); }
     void setAmbientXfer() { setPFloatOnClick(0, 1, 4); }
     #if ENABLED(MPC_INCLUDE_FAN)
       #define MPC_FAN_FDIGITS 4
